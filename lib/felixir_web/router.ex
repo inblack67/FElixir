@@ -5,8 +5,10 @@ defmodule FelixirWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", FelixirWeb do
+  scope "/api/graphql" do
     pipe_through :api
+    get "/", Absinthe.Plug.GraphiQL, schema: FelixirWeb.Schema, interface: :playground
+    post "/", Absinthe.Plug, schema: FelixirWeb.Schema
   end
 
   # Enables LiveDashboard only for development
