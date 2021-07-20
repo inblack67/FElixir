@@ -1,5 +1,7 @@
 # Felixir
 
+[Youtube Playlist](https://www.youtube.com/watch?v=Aj4AoGh-vHU&list=PLXv5LxnUqHxPeTIKfViGMYdwiXdbCEW0k&ab_channel=CodeDexterity)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
@@ -8,7 +10,7 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Ready to run in production? Please [check the deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
 ## Learn more
 
