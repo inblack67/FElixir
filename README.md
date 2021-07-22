@@ -2,6 +2,29 @@
 
 [Youtube Playlist](https://www.youtube.com/watch?v=Aj4AoGh-vHU&list=PLXv5LxnUqHxPeTIKfViGMYdwiXdbCEW0k&ab_channel=CodeDexterity)
 
+## Backend
+
+- Elixir
+- Phoenix
+- GraphQL
+- Deployment
+  - Gigalixir
+
+## App
+
+- Flutter
+- GraphQL
+
+## Web
+
+- Next.js
+- TypeScript
+- Recoil
+- GraphQL
+  - Apollo/URQL
+- Deployment
+  - Vercel
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
