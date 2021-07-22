@@ -1,6 +1,6 @@
 # Felixir
 
-[Youtube Playlist](https://www.youtube.com/watch?v=Aj4AoGh-vHU&list=PLXv5LxnUqHxPeTIKfViGMYdwiXdbCEW0k&ab_channel=CodeDexterity)
+[Youtube Playlist](https://youtube.com/playlist?list=PLXv5LxnUqHxPeTIKfViGMYdwiXdbCEW0k)
 
 ## Backend
 
