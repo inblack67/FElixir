@@ -1,12 +1,24 @@
 defmodule FelixirWeb.Router do
   use FelixirWeb, :router
 
+  alias FelixirWeb.AuthController
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  scope "/api/graphql" do
+  pipeline :graphql do
+    plug :accepts, ["json"]
+  end
+
+  scope "/api" do
     pipe_through :api
+    post "/auth/register", AuthController, :register
+    post "/auth/login", AuthController, :login
+  end
+
+  scope "/api/graphql" do
+    pipe_through :graphql
     get "/", Absinthe.Plug.GraphiQL, schema: FelixirWeb.Schema, interface: :playground
     post "/", Absinthe.Plug, schema: FelixirWeb.Schema
   end
