@@ -2,11 +2,13 @@ defmodule Felixir.Auth.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Felixir.Auth.User
+
   schema "users" do
-    field :email, :string
-    field :name, :string
-    field :password, :string
-    field :username, :string
+    field(:email, :string)
+    field(:name, :string)
+    field(:password, :string)
+    field(:username, :string)
 
     timestamps()
   end
@@ -20,10 +22,18 @@ defmodule Felixir.Auth.User do
     |> unique_constraint(:username)
     |> validate_format(:email, ~r/@/)
     |> update_change(:email, fn email -> String.downcase(email) end)
+    |> update_change(:username, fn username -> String.downcase(username) end)
     |> validate_length(:username, min: 4, max: 30)
     |> validate_length(:name, min: 3, max: 30)
     |> validate_length(:password, min: 8, max: 30)
     |> hash_password
+  end
+
+  def login_changeset(attrs) do
+    %User{}
+    |> cast(attrs, [:username, :password])
+    |> validate_required([:username, :password])
+    |> update_change(:username, &String.downcase/1)
   end
 
   defp hash_password(%Ecto.Changeset{} = changeset) do
