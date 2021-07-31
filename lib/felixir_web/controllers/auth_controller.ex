@@ -7,7 +7,7 @@ defmodule FelixirWeb.AuthController do
   alias FelixirWeb.Constants
   alias Felixir.Auth.User
 
-  plug :dont_exploit_me when action in [:login]
+  plug :dont_exploit_me when action in [:login, :register]
   plug :protect_me when action in [:logout, :getme]
 
   def login(conn, params) do
