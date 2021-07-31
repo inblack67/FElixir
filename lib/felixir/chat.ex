@@ -18,7 +18,7 @@ defmodule Felixir.Chat do
 
   """
   def list_rooms do
-    Repo.all(Room)
+    Repo.all(from(r in Room, preload: [:user]))
   end
 
   @doc """
@@ -100,5 +100,9 @@ defmodule Felixir.Chat do
   """
   def change_room(%Room{} = room, attrs \\ %{}) do
     Room.changeset(room, attrs)
+  end
+
+  def delete_room_by_id(room_id) do
+    
   end
 end

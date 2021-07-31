@@ -3,10 +3,10 @@ defmodule Felixir.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :name, :string
-      add :email, :string
-      add :username, :string
-      add :password, :string
+      add :name, :string, null: false
+      add :email, :string, null: false
+      add :username, :string, null: false
+      add :password, :string, null: false
 
       timestamps()
     end
