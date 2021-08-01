@@ -4,6 +4,7 @@ defmodule Felixir.Auth.User do
 
   alias Felixir.Auth.User
   alias Felixir.Chat.Room
+  alias Felixir.Chat.Message.Message
 
   schema "users" do
     field(:email, :string)
@@ -12,6 +13,7 @@ defmodule Felixir.Auth.User do
     field(:username, :string)
 
     has_many :rooms, Room
+    has_many :messages, Message
 
     timestamps()
   end

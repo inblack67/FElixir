@@ -3,12 +3,15 @@ defmodule Felixir.Chat.Room do
   import Ecto.Changeset
 
   alias Felixir.Auth.User
+  alias Felixir.Chat.Message.Message
 
   schema "rooms" do
     field :description, :string
     field :name, :string
 
     belongs_to :user, User
+
+    has_many :messages, Message
 
     timestamps()
   end

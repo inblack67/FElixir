@@ -3,4 +3,5 @@ defmodule FelixirWeb.Schema.Types do
 
   import_types(FelixirWeb.Schema.Types.UserType)
   import_types(FelixirWeb.Schema.Types.RoomType)
+  import_types(FelixirWeb.Schema.Types.MessageType)
 end
