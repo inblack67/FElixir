@@ -5,6 +5,7 @@ defmodule FelixirWeb.Schema.Types.RoomType do
     field :id, :id
     field :user_id, :id
     field :user, :user_type
+    field :messages, list_of(:message_type)
     field :name, :string
     field :description, :string
     field :inserted_at, :string
