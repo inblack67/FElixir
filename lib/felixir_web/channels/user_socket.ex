@@ -19,7 +19,9 @@ defmodule FelixirWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   @impl true
-  def connect(_params, socket, _connect_info) do
+  def connect(params, socket, _connect_info) do
+    IO.puts("socket params")
+    IO.inspect(params)
     {:ok, socket}
   end
 
