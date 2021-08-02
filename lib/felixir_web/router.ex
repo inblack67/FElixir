@@ -27,7 +27,12 @@ defmodule FelixirWeb.Router do
 
   scope "/api/graphql" do
     pipe_through :graphql
-    get "/", Absinthe.Plug.GraphiQL, schema: FelixirWeb.Schema, interface: :playground
+
+    get "/", Absinthe.Plug.GraphiQL,
+      schema: FelixirWeb.Schema,
+      interface: :playground,
+      socket: FelixirWeb.UserSocket
+
     post "/", Absinthe.Plug, schema: FelixirWeb.Schema
   end
 
