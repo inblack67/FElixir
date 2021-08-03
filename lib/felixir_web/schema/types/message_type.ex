@@ -11,6 +11,11 @@ defmodule FelixirWeb.Schema.Types.MessageType do
     field :inserted_at, :string
   end
 
+  object :deleted_message_type do
+    field :room_id, :id
+    field :message_id, :id
+  end
+
   input_object :list_messages_type do
     field :room_id, non_null(:id)
   end
@@ -22,5 +27,10 @@ defmodule FelixirWeb.Schema.Types.MessageType do
 
   input_object :delete_message_input do
     field :message_id, non_null(:id)
+    field :room_id, non_null(:id)
+  end
+
+  input_object :deleted_message_input do
+    field :room_id, non_null(:id)
   end
 end

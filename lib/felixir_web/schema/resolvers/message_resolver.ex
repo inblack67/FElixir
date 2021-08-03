@@ -6,9 +6,9 @@ defmodule FelixirWeb.Schema.Resolvers.MessageResolver do
   alias FelixirWeb.Constants
 
   def delete_message(_, %{input: input}, %{context: context}) do
-    case Message.delete_message_by_id(input.message_id, context.current_user.id) do
+    case Message.delete_message_by_id(input.message_id, input.room_id, context.current_user.id) do
       {1, _} ->
-        {:ok, true}
+        {:ok, %{message_id: input.message_id, room_id: input.room_id}}
 
       {0, _} ->
         {:error, Constants.not_found()}
