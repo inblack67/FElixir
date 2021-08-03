@@ -1,6 +1,9 @@
 defmodule FelixirWeb.UserSocket do
   use Phoenix.Socket
 
+  use Absinthe.Phoenix.Socket,
+    schema: FelixirWeb.Schema
+
   ## Channels
   # channel "room:*", FelixirWeb.RoomChannel
 

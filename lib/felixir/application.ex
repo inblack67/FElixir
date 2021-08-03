@@ -14,9 +14,10 @@ defmodule Felixir.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Felixir.PubSub},
       # Start the Endpoint (http/https)
-      FelixirWeb.Endpoint
+      FelixirWeb.Endpoint,
       # Start a worker by calling: Felixir.Worker.start_link(arg)
       # {Felixir.Worker, arg}
+      {Absinthe.Subscription, FelixirWeb.Endpoint}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

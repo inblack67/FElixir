@@ -4,6 +4,7 @@ defmodule FelixirWeb.Schema do
   import_types(FelixirWeb.Schema.Types)
 
   alias FelixirWeb.Schema.Resolvers
+  alias FelixirWeb.Topics
 
   query do
     @desc "greet"
@@ -42,7 +43,7 @@ defmodule FelixirWeb.Schema do
     end
 
     @desc "Create Message"
-    field :create_message, :boolean do
+    field :create_message, :message_type do
       arg(:input, non_null(:message_input_type))
       resolve(&Resolvers.MessageResolver.create_message/3)
     end
@@ -51,6 +52,27 @@ defmodule FelixirWeb.Schema do
     field :delete_message, :boolean do
       arg(:input, non_null(:delete_message_input))
       resolve(&Resolvers.MessageResolver.delete_message/3)
+    end
+  end
+
+  subscription do
+    @desc "New Message"
+    field :new_message, :message_type do
+      arg(:input, non_null(:delete_room_input))
+
+      config(fn %{input: input}, _ ->
+        {:ok, topic: "#{input.room_id}:#{Topics.new_message()}"}
+      end)
+
+      trigger(:create_message,
+        topic: fn new_message ->
+          "#{new_message.room_id}:#{Topics.new_message()}"
+        end
+      )
+
+      resolve(fn new_message, _, _ ->
+        {:ok, new_message}
+      end)
     end
   end
 end
