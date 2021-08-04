@@ -25,7 +25,11 @@ defmodule FelixirWeb.Schema do
     @desc "Get all Message"
     field :messages, list_of(:message_type) do
       arg(:input, non_null(:list_messages_type))
-      resolve(&Resolvers.MessageResolver.get_all_messages/3)
+    end
+
+    @desc "Get Me"
+    field :get_me, :user_type do
+      resolve(&Resolvers.UserResolver.get_me/3)
     end
   end
 
