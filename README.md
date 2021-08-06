@@ -1,6 +1,6 @@
 # Felixir
 
-[Youtube Playlist](https://youtube.com/playlist?list=PLXv5LxnUqHxPeTIKfViGMYdwiXdbCEW0k)
+[YouTube Playlist](https://youtube.com/playlist?list=PLXv5LxnUqHxPeTIKfViGMYdwiXdbCEW0k)
 
 ## Backend
 
@@ -19,9 +19,12 @@
 
 - Next.js
 - TypeScript
-- Recoil
+- SWR
 - GraphQL
-  - Apollo/URQL
+  - URQL
+  - GraphQL CodeGen
+- Recoil
+- Materialize CSS
 - Deployment
   - Vercel
 
