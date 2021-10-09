@@ -23,13 +23,10 @@ defmodule Felixir.Chat.Message do
   # end
 
   def list_messages(room_id, cursor \\ nil) do
-    IO.puts("cursor => ")
-    IO.inspect(cursor)
+    limit = 10
 
     case cursor do
       nil ->
-        limit = 10
-
         Repo.all(
           from(m in Message, where: m.room_id == ^room_id, limit: ^limit, preload: [:user, :room])
         )
@@ -37,7 +34,8 @@ defmodule Felixir.Chat.Message do
       cursor ->
         Repo.all(
           from(m in Message,
-            where: m.room_id == ^room_id and m.inserted_at <= ^cursor,
+            where: m.room_id == ^room_id and m.id > ^cursor,
+            limit: ^limit,
             preload: [:user, :room]
           )
         )
