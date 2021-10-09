@@ -18,6 +18,7 @@ defmodule FelixirWeb.Schema.Types.MessageType do
 
   input_object :list_messages_type do
     field :room_id, non_null(:id)
+    field :cursor, :string
   end
 
   input_object :message_input_type do

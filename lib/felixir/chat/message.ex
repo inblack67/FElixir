@@ -17,8 +17,31 @@ defmodule Felixir.Chat.Message do
       [%Message{}, ...]
 
   """
-  def list_messages(room_id) do
-    Repo.all(from(m in Message, where: m.room_id == ^room_id, preload: [:user, :room]))
+
+  # def list_messages(room_id) do
+  #   Repo.all(from(m in Message, where: m.room_id == ^room_id, preload: [:user, :room]))
+  # end
+
+  def list_messages(room_id, cursor \\ nil) do
+    IO.puts("cursor => ")
+    IO.inspect(cursor)
+
+    case cursor do
+      nil ->
+        limit = 10
+
+        Repo.all(
+          from(m in Message, where: m.room_id == ^room_id, limit: ^limit, preload: [:user, :room])
+        )
+
+      cursor ->
+        Repo.all(
+          from(m in Message,
+            where: m.room_id == ^room_id and m.inserted_at <= ^cursor,
+            preload: [:user, :room]
+          )
+        )
+    end
   end
 
   @doc """
