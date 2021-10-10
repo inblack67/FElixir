@@ -18,9 +18,12 @@ defmodule FelixirWeb.Schema.Resolvers.MessageResolver do
     end
   end
 
-  def get_all_messages(_, %{input: input}, %{context: _context}) do
-    messages = Message.list_messages(input.room_id)
-    {:ok, messages}
+  def get_all_messages(_, %{input: %{room_id: room_id, cursor: cursor}}, %{context: _context}) do
+    {:ok, Message.list_messages(room_id, cursor)}
+  end
+
+  def get_all_messages(_, %{input: %{room_id: room_id}}, %{context: _context}) do
+    {:ok, Message.list_messages(room_id)}
   end
 
   def create_message(_, %{input: input}, %{context: context}) do
