@@ -11,32 +11,73 @@ defmodule FelixirWeb.AuthController do
   plug :protect_me when action in [:logout, :getme]
 
   def login(conn, params) do
-    case User.login_changeset(params) do
-      %Ecto.Changeset{valid?: true, changes: %{username: username, password: password}} ->
-        user = Auth.get_by_username(username)
+    # IO.inspect(conn)
 
-        case user do
-          %User{} ->
-            if Argon2.verify_pass(password, user.password) do
-              conn
-              |> put_status(:created)
-              |> put_session(:current_user_id, user.id)
-              |> render("acknowledge.json", %{message: "Logged In"})
-            else
+    %Plug.Conn{req_headers: req_headers} = conn
+    req_headers_map = Enum.into(req_headers, %{})
+    # IO.inspect(req_headers_map)
+    # IO.inspect(req_headers_map["cookie"])
+
+    if req_headers_map["origin"] === nil do
+      IO.inspect("no origin")
+
+      case User.login_changeset(params) do
+        %Ecto.Changeset{valid?: true, changes: %{username: username, password: password}} ->
+          user = Auth.get_by_username(username)
+
+          case user do
+            %User{} ->
+              if Argon2.verify_pass(password, user.password) do
+                conn
+                |> put_status(:created)
+                |> put_session(:current_user_id, user.id)
+                |> render("acknowledge.json", %{message: "Logged In"})
+              else
+                render(conn, "errors.json", %{errors: Constants.invalid_credentials()})
+              end
+
+            _ ->
               render(conn, "errors.json", %{errors: Constants.invalid_credentials()})
-            end
+          end
 
-          _ ->
-            render(conn, "errors.json", %{errors: Constants.invalid_credentials()})
-        end
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "errors.json", %{
+            errors: Utils.format_changeset_errors(changeset)
+          })
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "errors.json", %{
-          errors: Utils.format_changeset_errors(changeset)
-        })
+        {_, _} ->
+          render(conn, "errors.json", %{message: Constants.internal_server_error()})
+      end
+    else
+      IO.inspect("yes origin #{req_headers_map["origin"]}")
 
-      {_, _} ->
-        render(conn, "errors.json", %{message: Constants.internal_server_error()})
+      case User.login_changeset(params) do
+        %Ecto.Changeset{valid?: true, changes: %{username: username, password: password}} ->
+          user = Auth.get_by_username(username)
+
+          case user do
+            %User{} ->
+              if Argon2.verify_pass(password, user.password) do
+                conn
+                |> put_status(:created)
+                |> put_session(:current_user_id, user.id)
+                |> render("acknowledge.json", %{message: "Logged In"})
+              else
+                render(conn, "errors.json", %{errors: Constants.invalid_credentials()})
+              end
+
+            _ ->
+              render(conn, "errors.json", %{errors: Constants.invalid_credentials()})
+          end
+
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "errors.json", %{
+            errors: Utils.format_changeset_errors(changeset)
+          })
+
+        {_, _} ->
+          render(conn, "errors.json", %{message: Constants.internal_server_error()})
+      end
     end
   end
 
@@ -56,6 +97,18 @@ defmodule FelixirWeb.AuthController do
   end
 
   def getme(conn, _params) do
+    # IO.inspect(conn)
+    %Plug.Conn{req_headers: req_headers} = conn
+    req_headers_map = Enum.into(req_headers, %{})
+    # IO.inspect(req_headers_map)
+    # IO.inspect(req_headers_map["cookie"])
+
+    if req_headers_map["origin"] == nil do
+      IO.inspect("no origin")
+    else
+      IO.inspect("yes origin #{req_headers_map["origin"]}")
+    end
+
     render(conn, "getme.json", %{current_user: conn.assigns.current_user})
   end
 

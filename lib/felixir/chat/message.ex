@@ -23,7 +23,12 @@ defmodule Felixir.Chat.Message do
     case cursor do
       nil ->
         Repo.all(
-          from(m in Message, where: m.room_id == ^room_id, limit: ^limit, preload: [:user, :room])
+          from(m in Message,
+            where: m.room_id == ^room_id,
+            limit: ^limit,
+            preload: [:user, :room],
+            order_by: [desc: m.id]
+          )
         )
 
       cursor ->

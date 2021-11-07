@@ -9,7 +9,7 @@ defmodule FelixirWeb.Plugs.ProtectGraphql do
   end
 
   def call(conn, _params) do
-    user_id = Plug.Conn.get_session(conn, :current_user_id)
+    user_id = Plug.Conn.get_session(conn, :zcurrent_user_id)
 
     if user_id do
       user = Auth.get_user!(user_id)

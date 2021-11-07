@@ -14,7 +14,7 @@ defmodule FelixirWeb.Router do
   pipeline :graphql do
     plug :accepts, ["json"]
     plug :fetch_session
-    plug ProtectGraphql
+    # plug ProtectGraphql
   end
 
   scope "/api" do

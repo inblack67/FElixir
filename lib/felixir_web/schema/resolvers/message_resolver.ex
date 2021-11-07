@@ -30,7 +30,8 @@ defmodule FelixirWeb.Schema.Resolvers.MessageResolver do
     case Chat.get_room(input.room_id) do
       %Room{} ->
         input_with_ids =
-          Map.merge(input, %{user_id: context.current_user.id, room_id: input.room_id})
+          Map.merge(input, %{user_id: 1, room_id: input.room_id})
+          # Map.merge(input, %{user_id: context.current_user.id, room_id: input.room_id})
 
         case Message.create_message(input_with_ids) do
           {:ok, message} ->
