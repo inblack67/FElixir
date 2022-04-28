@@ -1,47 +1,33 @@
-# Felixir
+# Feature Rich GraphQL API in Elixir & Phoenix
 
-[YouTube Playlist](https://youtube.com/playlist?list=PLXv5LxnUqHxPeTIKfViGMYdwiXdbCEW0k)
+## Functionalities
 
-## Backend
+### User
+  - Registration
+  - Authentication & Authorization
+    - Login
+    - Logout
+    - Get Authenticated User
+    - Protect Routes (via Plug => like middlewares in Node.js)
+  
+### Rooms
+  - Create Room
+  - Get All Rooms
+  - Delete Room and it's respective messages
+
+### Messages
+  - Post message to a particular room
+  - Read messages of a Room
+    - Pagination (Cursor Based)
+  - Realtime New Messages updates to users who have subscribed to that particular Room
+
+
+## Tech Stack
 
 - Elixir
 - Phoenix
-- GraphQL
-- Deployment
-  - Gigalixir
-
-## App
-
-- Flutter
+- PostgreSQL
 - GraphQL
 
-## Web
-
-- Next.js
-- TypeScript
-- SWR
-- GraphQL
-  - URQL
-  - GraphQL CodeGen
-- Recoil
-- Materialize CSS
-- Deployment
-  - Vercel
-
-To start your Phoenix server:
-
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check the deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+# YouTube
+## @Code_Dexterity
