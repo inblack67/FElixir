@@ -1,5 +1,7 @@
 # Feature Rich GraphQL API in Elixir & Phoenix
 
+[Udemy Course Link](https://www.udemy.com/course/feature-rich-graphql-api-in-elixir-phoenix/?referralCode=87349DC1BD7DFC0F8000)
+
 ## Functionalities
 
 ### User
